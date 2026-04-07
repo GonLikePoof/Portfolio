@@ -4,6 +4,7 @@ import { motion, useInView, useMotionValueEvent, useScroll } from "framer-motion
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const DESIGNER_NAME = "Findlay Jameson";
+const CONTACT_EMAIL = "findlayjameson80@gmail.com";
 
 const scrollToId = (id: string) => {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -131,6 +132,18 @@ export default function Home() {
 
   const onFormSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const name = String(formData.get("name") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
+    const message = String(formData.get("message") ?? "").trim();
+
+    const subject = encodeURIComponent(`Project enquiry from ${name || "Website visitor"}`);
+    const body = encodeURIComponent(
+      `Name: ${name || "N/A"}` + "\n" + `Email: ${email || "N/A"}` + "\n\n" + `Message:\n${message || "N/A"}`,
+    );
+
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
   }, []);
 
   return (
@@ -372,7 +385,7 @@ export default function Home() {
                 {
                   icon: IconSparkle,
                   title: "Detail-Focused",
-                  desc: "Pixel-level polish, spacing, and hierarchy so every page feels intentional.",
+                  desc: "I care deeply about the small things, from spacing to flow, so your site feels thoughtful and truly yours.",
                 },
                 {
                   icon: IconClock,
@@ -382,7 +395,7 @@ export default function Home() {
                 {
                   icon: IconChat,
                   title: "Direct Communication",
-                  desc: "You work with me directly—no layers, no confusion, just straight answers.",
+                  desc: "You talk directly with me from start to finish, with honest updates and real collaboration at every step.",
                 },
               ].map(({ icon: Icon, title, desc }) => (
                 <motion.div
@@ -534,4 +547,8 @@ export default function Home() {
     </div>
   );
 }
+
+
+
+
 
