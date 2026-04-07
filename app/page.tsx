@@ -357,7 +357,7 @@ export default function Home() {
               Why work with me
             </h2>
             <motion.div
-              className="grid gap-10 sm:grid-cols-3 sm:gap-8"
+              className="mx-auto grid max-w-5xl gap-10 sm:grid-cols-3 sm:gap-8"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: false, margin: "-60px", amount: 0.2 }}
@@ -395,13 +395,13 @@ export default function Home() {
                       transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const },
                     },
                   }}
-                  className="text-center sm:text-left"
+                  className="mx-auto w-full max-w-xs text-center sm:max-w-none"
                 >
                   <div className="mb-4 inline-flex rounded-xl bg-[#7B2FFF]/15 p-3 text-[#7B2FFF]">
                     <Icon className="h-6 w-6" />
                   </div>
                   <h3 className="text-lg font-bold text-white">{title}</h3>
-                  <p className="mt-2 text-[#888888]">{desc}</p>
+                  <p className="mx-auto mt-2 max-w-[30ch] text-[#888888]">{desc}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -534,3 +534,4 @@ export default function Home() {
     </div>
   );
 }
+
