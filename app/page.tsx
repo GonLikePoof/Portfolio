@@ -138,12 +138,31 @@ export default function Home() {
     const email = String(formData.get("email") ?? "").trim();
     const message = String(formData.get("message") ?? "").trim();
 
-    const subject = encodeURIComponent(`Project enquiry from ${name || "Website visitor"}`);
-    const body = encodeURIComponent(
-      `Name: ${name || "N/A"}` + "\n" + `Email: ${email || "N/A"}` + "\n\n" + `Message:\n${message || "N/A"}`,
+    const subject = `Project enquiry from ${name || "Website visitor"}`;
+    const body = `Name: ${name || "N/A"}\nEmail: ${email || "N/A"}\n\nMessage:\n${message || "N/A"}`;
+
+    const gmailParams = new URLSearchParams({
+      view: "cm",
+      fs: "1",
+      to: CONTACT_EMAIL,
+      su: subject,
+      body,
+    });
+
+    const opened = window.open(
+      `https://mail.google.com/mail/?${gmailParams.toString()}`,
+      "_blank",
+      "noopener,noreferrer",
     );
 
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+    // Fallback if popups/new-tab open is blocked.
+    if (!opened) {
+      const mailtoParams = new URLSearchParams({
+        subject,
+        body,
+      });
+      window.location.href = `mailto:${CONTACT_EMAIL}?${mailtoParams.toString()}`;
+    }
   }, []);
 
   return (
