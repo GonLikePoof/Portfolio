@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #fafafa;
+  --accent: #7b2fff;
+  --muted: #888888;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+@keyframes hero-gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.hero-shifting-gradient {
+  background-image: linear-gradient(
+    105deg,
+    #7b2fff 0%,
+    #22d3ee 28%,
+    #c4b5fd 45%,
+    #22d3ee 62%,
+    #7b2fff 85%,
+    #a855f7 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 280% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  /* Beat inherited `text-white` from layout + satisfy WebKit gradient text */
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  animation: hero-gradient-shift 9s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-shifting-gradient {
+    animation: none;
+    background-position: 35% 50%;
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+}
