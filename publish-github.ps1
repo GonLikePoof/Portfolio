@@ -1,5 +1,6 @@
-# Creates github.com/GonLikePoof/my-portfolio (if missing) and pushes main.
-# First run will open the browser once for GitHub login.
+# Creates github.com/<your-account>/my-portfolio (if missing) and pushes main.
+# If Windows blocks scripts, either double-click publish-github.cmd or run:
+#   powershell -NoProfile -ExecutionPolicy Bypass -File ".\publish-github.ps1"
 
 $ErrorActionPreference = "Stop"
 Set-Location $PSScriptRoot
